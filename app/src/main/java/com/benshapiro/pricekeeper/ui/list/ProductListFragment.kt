@@ -10,10 +10,6 @@ import com.benshapiro.pricekeeper.R
 
 class ProductListFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ProductListFragment()
-    }
-
     private lateinit var viewModel: ProductListViewModel
 
     override fun onCreateView(

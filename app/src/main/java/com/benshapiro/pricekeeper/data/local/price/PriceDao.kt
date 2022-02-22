@@ -7,16 +7,13 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface PriceDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(price: List<Price>)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNewPrice(price: Price)
+    suspend fun insert(price: Price)
 
     @Update
     suspend fun update(price: Price)
 
-    @Query("SELECT * FROM table_prices WHERE name LIKE :price")
-    fun searchDatabase(price: String): Flow<List<Price>>
+    @Query("SELECT * FROM table_prices WHERE itemId LIKE :itemId")
+    fun searchDatabase(itemId: Int): Flow<List<Price>>
 
     // This simply deletes all values
     // Again this must be a suspend fun, signifying it will utilise coroutines
