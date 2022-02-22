@@ -1,4 +1,4 @@
-package com.benshapiro.pricekeeper.data.local
+package com.benshapiro.pricekeeper.data.local.price
 
 import androidx.room.*
 import com.benshapiro.pricekeeper.model.Price

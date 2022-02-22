@@ -2,8 +2,8 @@ package com.benshapiro.pricekeeper.di
 
 import android.content.Context
 import androidx.room.Room
-import com.benshapiro.pricekeeper.data.local.PriceDao
-import com.benshapiro.pricekeeper.data.local.PriceDatabase
+import com.benshapiro.pricekeeper.data.local.price.PriceDao
+import com.benshapiro.pricekeeper.data.local.price.PriceDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
