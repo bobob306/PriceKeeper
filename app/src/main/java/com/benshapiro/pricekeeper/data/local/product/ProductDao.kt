@@ -3,6 +3,7 @@ package com.benshapiro.pricekeeper.data.local.product
 import androidx.room.*
 import com.benshapiro.pricekeeper.data.SortOrder
 import com.benshapiro.pricekeeper.model.Product
+import dagger.Provides
 import kotlinx.coroutines.flow.Flow
 
 @Dao

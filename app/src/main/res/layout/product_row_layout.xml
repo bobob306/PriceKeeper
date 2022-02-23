@@ -38,7 +38,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/priceTV"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.15"
+        app:layout_constraintWidth_percent="0.2"
         tools:text="Shop" />
 
     <ImageButton

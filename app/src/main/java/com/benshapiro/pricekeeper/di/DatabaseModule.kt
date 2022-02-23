@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.benshapiro.pricekeeper.data.local.price.PriceDao
 import com.benshapiro.pricekeeper.data.local.price.PriceDatabase
+import com.benshapiro.pricekeeper.data.local.product.ProductDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,6 +31,12 @@ object DatabaseModule {
     @Provides
     fun providePriceDao(priceDatabase: PriceDatabase) : PriceDao {
         return priceDatabase.getPriceDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideProductDao(priceDatabase: PriceDatabase) : ProductDao {
+        return priceDatabase.getProductDao()
     }
 
 }
