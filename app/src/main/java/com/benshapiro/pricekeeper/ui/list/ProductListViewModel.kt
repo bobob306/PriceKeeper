@@ -2,12 +2,15 @@ package com.benshapiro.pricekeeper.ui.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.benshapiro.pricekeeper.data.PreferencesManager
+import com.benshapiro.pricekeeper.data.SortOrder
 import com.benshapiro.pricekeeper.di.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,5 +33,9 @@ class ProductListViewModel
             repository.getProductsList(query, filterPreferences.sortOrder)
         }
     val products = productsFlow.asLiveData()
+
+    fun onSortOrderSelected(sortOrder: SortOrder) = viewModelScope.launch {
+        preferencesManager.updateSortOrder(sortOrder)
+    }
 
 }

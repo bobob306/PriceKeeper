@@ -2,6 +2,7 @@ package com.benshapiro.pricekeeper.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 import java.text.NumberFormat
 import java.util.*
 
@@ -13,7 +14,8 @@ data class Product (
     val shop: String,
     val currentPrice: Double,
     val priceDate: Int,
-)
+    val favourite: Int
+) : Serializable
 
 fun Product.getFormattedPrice(): String =
     NumberFormat.getCurrencyInstance(Locale.UK).format(currentPrice)

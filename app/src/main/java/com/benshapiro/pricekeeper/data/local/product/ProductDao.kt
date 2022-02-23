@@ -21,7 +21,7 @@ interface ProductDao {
         when (sortOrder) {
             SortOrder.BY_NAME -> getProductsSortedByName(query)
             SortOrder.BY_PRICE -> getProductsSortedByPrice(query)
-            SortOrder.BY_DATE -> getProductsSortedByDate(query)
+            SortOrder.BY_SHOP -> getProductsSortedByShop(query)
         }
     @Query("SELECT * FROM product WHERE name LIKE '%' || :searchQuery || '%' ORDER BY name ASC")
     fun getProductsSortedByName(searchQuery: String): Flow<List<Product>>
@@ -29,6 +29,6 @@ interface ProductDao {
     @Query("SELECT * FROM product WHERE name LIKE '%' || :searchQuery || '%' ORDER BY currentPrice ASC")
     fun getProductsSortedByPrice(searchQuery: String): Flow<List<Product>>
 
-    @Query("SELECT * FROM product WHERE name LIKE '%' || :searchQuery || '%' ORDER BY priceDate DESC")
-    fun getProductsSortedByDate(searchQuery: String): Flow<List<Product>>
+    @Query("SELECT * FROM product WHERE name LIKE '%' || :searchQuery || '%' ORDER BY shop ASC")
+    fun getProductsSortedByShop(searchQuery: String): Flow<List<Product>>
 }
