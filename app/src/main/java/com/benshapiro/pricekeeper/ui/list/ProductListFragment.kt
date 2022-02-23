@@ -9,14 +9,16 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.benb.inventory.adapter.ProductListAdapter
 import com.benshapiro.pricekeeper.R
 import com.benshapiro.pricekeeper.data.SortOrder
 import com.benshapiro.pricekeeper.databinding.ProductListFragmentBinding
+import com.benshapiro.pricekeeper.model.Product
 import com.benshapiro.pricekeeper.utils.onQueryTextChanged
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProductListFragment : Fragment() {
+class ProductListFragment : Fragment(), ProductListAdapter.onProductClickListener {
 
     private var _binding : ProductListFragmentBinding? = null
     private val binding get() = _binding!!
@@ -37,8 +39,9 @@ class ProductListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = ProductListAdapter(onItemClicked = {
-            val action = ProductListFragmentDirections.actionProductListFragmentToProductDetailFragment(it.id)
+        val adapter = ProductListAdapter(onProductClicked = {
+            val action = ProductListFragmentDirections.actionProductListFragmentToProductDetailFragment()
+            action.product = it
             this.findNavController().navigate(action)
         }, this)
         binding.recyclerView.adapter = adapter
@@ -87,6 +90,14 @@ class ProductListFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onFavClicked(product: Product) {
+        viewModel.onFavClicked(product)
+    }
+
+    override fun onLineClicked(product: Product) {
+        viewModel.onLineClicked(product)
     }
 
 }

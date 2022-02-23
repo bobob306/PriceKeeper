@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.benshapiro.pricekeeper.data.PreferencesManager
 import com.benshapiro.pricekeeper.data.SortOrder
 import com.benshapiro.pricekeeper.di.Repository
+import com.benshapiro.pricekeeper.model.Product
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -36,6 +37,14 @@ class ProductListViewModel
 
     fun onSortOrderSelected(sortOrder: SortOrder) = viewModelScope.launch {
         preferencesManager.updateSortOrder(sortOrder)
+    }
+
+    fun onFavClicked(product: Product) {
+        // TODO
+    }
+
+    fun onLineClicked(product: Product) {
+        // TODO
     }
 
 }
