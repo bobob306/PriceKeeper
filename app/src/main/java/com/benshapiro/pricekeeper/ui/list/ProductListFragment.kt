@@ -52,6 +52,11 @@ class ProductListFragment : Fragment(), ProductListAdapter.onProductClickListene
             }
         }
 
+        binding.floatingActionButton.setOnClickListener {
+            val action = ProductListFragmentDirections.actionProductListFragmentToAddProductFragment()
+            this.findNavController().navigate(action)
+        }
+
         binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
 
         setHasOptionsMenu(true)
