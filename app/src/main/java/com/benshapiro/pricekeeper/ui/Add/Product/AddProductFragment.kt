@@ -1,4 +1,4 @@
-package com.benshapiro.pricekeeper.ui.Add
+package com.benshapiro.pricekeeper.ui.Add.Product
 
 import android.os.Bundle
 import android.util.Log

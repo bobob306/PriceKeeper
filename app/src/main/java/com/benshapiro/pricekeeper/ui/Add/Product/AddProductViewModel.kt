@@ -1,6 +1,5 @@
-package com.benshapiro.pricekeeper.ui.Add
+package com.benshapiro.pricekeeper.ui.Add.Product
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.benshapiro.pricekeeper.di.Repository
 import com.benshapiro.pricekeeper.model.Price

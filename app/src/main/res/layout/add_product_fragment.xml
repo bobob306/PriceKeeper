@@ -7,7 +7,7 @@
     android:id="@+id/addProduct"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Add.AddProductFragment">
+    tools:context=".ui.Add.Product.AddProductFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

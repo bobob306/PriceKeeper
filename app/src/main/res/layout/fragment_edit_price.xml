@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/editProductFragment"
-    tools:context="ui.Edit.Product.EditProductFragment">
+    android:id="@+id/editPriceFragment"
+    tools:context=".ui.Edit.Price.EditPriceFragment">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
