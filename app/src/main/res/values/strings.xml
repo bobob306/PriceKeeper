@@ -3,4 +3,6 @@
     <string name="sort_by_price">By Price</string>
     <string name="sort_by_name">By Name</string>
     <string name="sort_by_shop">By Shop</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

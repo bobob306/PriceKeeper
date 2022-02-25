@@ -11,10 +11,12 @@
         tools:layout="@layout/product_list_fragment" >
         <action
             android:id="@+id/action_productListFragment_to_productDetailFragment"
-            app:destination="@id/productDetailFragment" />
+            app:destination="@id/productDetailFragment"
+            app:popUpTo="@id/productListFragment" />
         <action
             android:id="@+id/action_productListFragment_to_addProductFragment"
-            app:destination="@id/addProductFragment" />
+            app:destination="@id/addProductFragment"
+            app:popUpTo="@id/productListFragment" />
     </fragment>
     <fragment
         android:id="@+id/productDetailFragment"
@@ -26,9 +28,27 @@
             app:argType="com.benshapiro.pricekeeper.model.Product"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_addPriceFragment"
+            app:destination="@id/addPriceFragment"
+            app:popUpTo="@id/productDetailFragment" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_editProductFragment"
+            app:destination="@id/editProductFragment"
+            app:popUpTo="@id/productDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/addProductFragment"
         android:name="com.benshapiro.pricekeeper.ui.Add.AddProductFragment"
         android:label="AddProductFragment" />
+    <fragment
+        android:id="@+id/addPriceFragment"
+        android:name="com.benshapiro.pricekeeper.AddPriceFragment"
+        android:label="fragment_add_price"
+        tools:layout="@layout/fragment_add_price" />
+    <fragment
+        android:id="@+id/editProductFragment"
+        android:name="com.benshapiro.pricekeeper.EditProductFragment"
+        android:label="fragment_edit_product"
+        tools:layout="@layout/fragment_edit_product" />
 </navigation>
