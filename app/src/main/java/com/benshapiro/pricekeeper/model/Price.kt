@@ -11,9 +11,9 @@ import java.util.*
 @Entity(tableName = "table_prices")
 data class Price(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Int = 0,
     val price: Double,
-    val date: Int,
+    val date: String,
     val name: String,
     val itemId: Int
 ) : Serializable

@@ -3,6 +3,7 @@ package com.benshapiro.pricekeeper.data.local.product
 import androidx.room.*
 import com.benshapiro.pricekeeper.data.SortOrder
 import com.benshapiro.pricekeeper.model.Product
+import com.benshapiro.pricekeeper.model.relations.productWithPrices
 import dagger.Provides
 import kotlinx.coroutines.flow.Flow
 
@@ -32,4 +33,8 @@ interface ProductDao {
 
     @Query("SELECT * FROM product WHERE name LIKE '%' || :searchQuery || '%' ORDER BY shop ASC")
     fun getProductsSortedByShop(searchQuery: String): Flow<List<Product>>
+
+    @Query("SELECT * FROM product ORDER BY itemId DESC LIMIT 1")
+    suspend fun getMostRecentProduct(): Product
+
 }

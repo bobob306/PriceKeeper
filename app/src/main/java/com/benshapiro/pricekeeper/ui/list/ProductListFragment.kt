@@ -25,10 +25,6 @@ class ProductListFragment : Fragment(), ProductListAdapter.onProductClickListene
 
     private val viewModel : ProductListViewModel  by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

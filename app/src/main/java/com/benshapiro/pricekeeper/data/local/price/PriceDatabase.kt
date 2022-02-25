@@ -7,7 +7,7 @@ import com.benshapiro.pricekeeper.model.Price
 import com.benshapiro.pricekeeper.model.Product
 import dagger.Module
 
-@Database(entities = [Price::class, Product::class], version = 1)
+@Database(entities = [Price::class, Product::class], version = 2)
 abstract class PriceDatabase : RoomDatabase() {
     abstract fun getPriceDao(): PriceDao
     abstract fun getProductDao(): ProductDao

@@ -24,6 +24,9 @@ class Repository
     suspend fun updateProduct(product: Product) {
         productDao.update(product)
     }
+    suspend fun getMostRecentProduct() : Product {
+        return productDao.getMostRecentProduct()
+    }
 
     fun getPriceHistory(itemId: Int) {
         priceDao.searchDatabase(itemId)

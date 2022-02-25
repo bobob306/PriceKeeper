@@ -9,11 +9,11 @@ import java.util.*
 @Entity(tableName = "product")
 data class Product (
     @PrimaryKey(autoGenerate = true)
-    val itemId: Int,
+    val itemId: Int = 0,
     val name: String,
     val shop: String,
     val currentPrice: Double,
-    val priceDate: Int,
+    val priceDate: String,
     val favourite: Int
 ) : Serializable
 
