@@ -40,4 +40,7 @@ class Repository
     suspend fun insertPrice(price: Price) {
         priceDao.insert(price)
     }
+    fun getPriceById(id: Int) : Flow<Price> {
+        return priceDao.getPriceById(id)
+    }
 }

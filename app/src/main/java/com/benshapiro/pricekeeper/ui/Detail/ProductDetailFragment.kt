@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.benshapiro.pricekeeper.R
@@ -36,7 +37,9 @@ class ProductDetailFragment : Fragment(), ProductDetailListAdapter.onPriceClickL
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = ProductDetailListAdapter(onPriceClicked = {
-            val action = ProductDetailFragmentDirections.actionProductDetailFragmentToEditPriceFragment()
+            val action = ProductDetailFragmentDirections.actionProductDetailFragmentToAddEditPriceFragment()
+            action.price = it
+            action.product = viewModel.product.value
             this.findNavController().navigate(action)
         }, this)
         binding.priceHistRV.adapter = adapter
@@ -67,8 +70,9 @@ class ProductDetailFragment : Fragment(), ProductDetailListAdapter.onPriceClickL
         }
 
         binding.fab2.setOnClickListener {
-            val action = ProductDetailFragmentDirections.actionProductDetailFragmentToAddPriceFragment()
-            this.findNavController().navigate(action)
+            val action = ProductDetailFragmentDirections.actionProductDetailFragmentToAddEditPriceFragment()
+            action.product = viewModel.product.value
+            Navigation.findNavController(it).navigate(action)
         }
 
         binding.priceHistRV.layoutManager = LinearLayoutManager(this.context)
