@@ -34,8 +34,8 @@ class Repository
     fun getPriceHistory(itemId: Int) : Flow<List<Price>> {
         return priceDao.getPriceHistory(itemId)
     }
-    suspend fun updatePrice(price: Price) {
-        priceDao.update(price)
+    suspend fun updatePrice(newPriceEntry: Price) {
+        priceDao.update(newPriceEntry)
     }
     suspend fun insertPrice(price: Price) {
         priceDao.insert(price)

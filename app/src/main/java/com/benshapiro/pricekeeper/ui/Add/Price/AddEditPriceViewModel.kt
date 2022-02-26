@@ -23,31 +23,32 @@ class AddEditPriceViewModel @Inject constructor(private val repository: Reposito
         repository.getPriceById(statePriceId).asLiveData()
     } else {null}
 
-    fun addNewPrice(price: String, date: String) {
-        if (isPriceValid(price, date)) {
-            insertNewPrice(price, date)
+    fun addNewPrice(newPrice: String, newDate: String) {
+        if (isPriceValid(newPrice, newDate)) {
+            insertNewPrice(newPrice, newDate)
         }
     }
 
-    private fun insertNewPrice(newPrice: String, newDate: String) {
+    private fun insertNewPrice(newPricePoint: String, newDate: String) {
         viewModelScope.launch {
-            val newPrice = Price(
+            val price = Price(
                 name = product.value!!.name,
-                price = newPrice.toDouble(),
+                price = newPricePoint.toDouble(),
                 date = newDate,
                 itemId = product.value!!.itemId
             )
             Log.d("id", "$statePriceId")
             if (statePriceId != -1) {
-                repository.updatePrice(newPrice)
+                Log.d("price", "$newPricePoint")
+                repository.updatePrice(price)
             } else {
-                repository.insertPrice(newPrice)
+                repository.insertPrice(price)
             }
         }
     }
 
-    private fun isPriceValid(price: String, date: String): Boolean {
-        if (price.isBlank() || date.isBlank()) {
+    private fun isPriceValid(newPricePoint: String, newDate: String): Boolean {
+        if (newPricePoint.isBlank() || newDate.isBlank()) {
             Log.d("blank", "true")
             return false
         }
