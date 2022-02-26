@@ -27,9 +27,12 @@ class Repository
     suspend fun getMostRecentProduct() : Product {
         return productDao.getMostRecentProduct()
     }
+    fun getProductById(itemId: Int) : Flow<Product> {
+        return productDao.getProductById(itemId)
+    }
 
-    fun getPriceHistory(itemId: Int) {
-        priceDao.searchDatabase(itemId)
+    fun getPriceHistory(itemId: Int) : Flow<List<Price>> {
+        return priceDao.getPriceHistory(itemId)
     }
     suspend fun updatePrice(price: Price) {
         priceDao.update(price)

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.benshapiro.pricekeeper.R
 import com.benshapiro.pricekeeper.databinding.ProductRowLayoutBinding
 import com.benshapiro.pricekeeper.model.Product
 import com.benshapiro.pricekeeper.model.getFormattedPrice
@@ -38,6 +39,9 @@ class ProductListAdapter(private val onProductClicked: (Product) -> Unit, privat
                 tvName.text = product.name
                 priceTV.text = product.getFormattedPrice()
                 shopTV.text = product.shop
+                favBtn.setImageResource(if (product.favourite == 0){
+                    R.drawable.ic_baseline_star_outline_24 } else {
+                        R.drawable.ic_baseline_star_rate_24 })
             }
         }
     }

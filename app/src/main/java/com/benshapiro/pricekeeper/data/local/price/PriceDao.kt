@@ -12,8 +12,8 @@ interface PriceDao {
     @Update
     suspend fun update(price: Price)
 
-    @Query("SELECT * FROM table_prices WHERE itemId LIKE :itemId")
-    fun searchDatabase(itemId: Int): Flow<List<Price>>
+    @Query("SELECT * FROM table_prices WHERE itemId =:itemId ORDER BY date DESC")
+    fun getPriceHistory(itemId: Int): Flow<List<Price>>
 
     // This simply deletes all values
     // Again this must be a suspend fun, signifying it will utilise coroutines

@@ -40,7 +40,18 @@ class ProductListViewModel
     }
 
     fun onFavClicked(product: Product) {
-        // TODO
+        val fav = if (product.favourite == 0) 1 else 0
+        val currentProduct = Product (
+            itemId = product.itemId,
+            name = product.name,
+            currentPrice = product.currentPrice,
+            priceDate = product.priceDate,
+            shop = product.shop,
+            favourite = fav
+        )
+        viewModelScope.launch {
+            repository.updateProduct(currentProduct)
+        }
     }
 
     fun onLineClicked(product: Product) {

@@ -37,4 +37,7 @@ interface ProductDao {
     @Query("SELECT * FROM product ORDER BY itemId DESC LIMIT 1")
     suspend fun getMostRecentProduct(): Product
 
+    @Query("SELECT * FROM product WHERE itemId = :itemId")
+    fun getProductById(itemId: Int): Flow<Product>
+
 }
