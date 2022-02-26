@@ -9,7 +9,7 @@ interface PriceDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(price: Price)
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
+    @Update
     suspend fun update(price: Price)
 
     @Query("SELECT * FROM table_prices WHERE itemId =:itemId ORDER BY date DESC")
