@@ -45,7 +45,7 @@ class AddProductViewModel
     private fun addNewPrice(name: String, price: String, shop: String, quantity: String, date: String) {
         viewModelScope.launch {
             val newItemId : Int = repository.getMostRecentProduct().itemId
-            val newPrice = Price(name = name, price = price.toDouble(), date = date, itemId = newItemId)
+            val newPrice = Price(name = name, price = price.toDouble(), date = date, quantity = quantity.toDouble(), itemId = newItemId)
             repository.insertPrice(newPrice)
         }
     }

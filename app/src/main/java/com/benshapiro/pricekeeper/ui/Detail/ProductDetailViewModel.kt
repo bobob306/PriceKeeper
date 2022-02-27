@@ -29,6 +29,7 @@ class ProductDetailViewModel @Inject constructor(private val repository: Reposit
             currentPrice = product.value!!.currentPrice,
             priceDate = product.value!!.priceDate,
             shop = product.value!!.shop,
+            quantity = product.value!!.quantity,
             favourite = fav
                 )
         viewModelScope.launch {

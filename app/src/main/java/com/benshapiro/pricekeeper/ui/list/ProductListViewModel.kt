@@ -47,6 +47,7 @@ class ProductListViewModel
             currentPrice = product.currentPrice,
             priceDate = product.priceDate,
             shop = product.shop,
+            quantity = product.quantity,
             favourite = fav
         )
         viewModelScope.launch {
