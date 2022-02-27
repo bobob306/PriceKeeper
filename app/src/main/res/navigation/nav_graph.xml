@@ -7,8 +7,8 @@
     <fragment
         android:id="@+id/productListFragment"
         android:name="com.benshapiro.pricekeeper.ui.list.ProductListFragment"
-        android:label="product_list_fragment"
-        tools:layout="@layout/product_list_fragment" >
+        android:label="Home"
+        tools:layout="@layout/product_list_fragment">
         <action
             android:id="@+id/action_productListFragment_to_productDetailFragment"
             app:destination="@id/productDetailFragment"
@@ -21,20 +21,16 @@
     <fragment
         android:id="@+id/productDetailFragment"
         android:name="com.benshapiro.pricekeeper.ui.Detail.ProductDetailFragment"
-        android:label="product_detail_fragment"
-        tools:layout="@layout/product_detail_fragment" >
+        android:label="Product Detail"
+        tools:layout="@layout/product_detail_fragment">
         <argument
             android:name="Product"
+            android:defaultValue="@null"
             app:argType="com.benshapiro.pricekeeper.model.Product"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <action
             android:id="@+id/action_productDetailFragment_to_addEditPriceFragment"
             app:destination="@id/addPriceFragment"
-            app:popUpTo="@id/productDetailFragment" />
-        <action
-            android:id="@+id/action_productDetailFragment_to_editProductFragment2"
-            app:destination="@id/editProductFragment"
             app:popUpTo="@id/productDetailFragment" />
         <action
             android:id="@+id/action_productDetailFragment_to_addProductFragment"
@@ -43,39 +39,28 @@
     <fragment
         android:id="@+id/addProductFragment"
         android:name="com.benshapiro.pricekeeper.ui.Add.Product.AddProductFragment"
-        tools:layout="@layout/add_product_fragment"
-        android:label="AddProductFragment" >
+        android:label="Add Product"
+        tools:layout="@layout/add_product_fragment">
         <argument
             android:name="Product"
+            android:defaultValue="@null"
             app:argType="com.benshapiro.pricekeeper.model.Product"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/addPriceFragment"
         android:name="com.benshapiro.pricekeeper.ui.Add.Price.AddEditPriceFragment"
-        android:label="fragment_add_price"
-        tools:layout="@layout/fragment_add_edit_price" >
+        android:label="Add/Edit Price"
+        tools:layout="@layout/fragment_add_edit_price">
         <argument
             android:name="Product"
+            android:defaultValue="@null"
             app:argType="com.benshapiro.pricekeeper.model.Product"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <argument
             android:name="Price"
+            android:defaultValue="@null"
             app:argType="com.benshapiro.pricekeeper.model.Price"
-            app:nullable="true"
-            android:defaultValue="@null" />
-    </fragment>
-    <fragment
-        android:id="@+id/editProductFragment"
-        android:name="com.benshapiro.pricekeeper.ui.Edit.Product.EditProductFragment"
-        android:label="fragment_edit_product"
-        tools:layout="@layout/fragment_edit_product" >
-        <argument
-            android:name="Product"
-            app:argType="com.benshapiro.pricekeeper.model.Product"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
     </fragment>
 </navigation>
