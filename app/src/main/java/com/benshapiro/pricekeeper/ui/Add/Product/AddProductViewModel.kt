@@ -2,11 +2,15 @@ package com.benshapiro.pricekeeper.ui.Add.Product
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.benshapiro.pricekeeper.databinding.AddProductFragmentBinding
 import com.benshapiro.pricekeeper.di.Repository
 import com.benshapiro.pricekeeper.model.Price
 import com.benshapiro.pricekeeper.model.Product
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.internal.format
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -16,6 +20,8 @@ class AddProductViewModel
 @Inject constructor(
     private val repository: Repository, private val state: SavedStateHandle
 ) : ViewModel() {
+
+    var dateStatus = MutableLiveData<Boolean?>()
 
     val productId = state.get<Product>("Product")?.itemId ?: -1
     val currentProduct = if (productId != -1) {
@@ -72,10 +78,6 @@ class AddProductViewModel
         var formatter = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
         formatter.isLenient = false
 
-        if (name.isBlank() || price.isBlank() || shop.isBlank() || quantity.isBlank() || date.isBlank()) {
-            return false
-        }
-        return true
+        return !(name.isBlank() || price.isBlank() || shop.isBlank() || quantity.isBlank() || date.isBlank())
     }
-
 }

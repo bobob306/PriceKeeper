@@ -58,14 +58,14 @@
         android:id="@+id/shopTitleTV"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Shop"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="8dp"
+        android:text="Shop"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/favTV"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/priceTitleTV"
-        app:layout_constraintWidth_percent="0.2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.16"
         tools:text="Shop" />
 
     <TextView
@@ -79,7 +79,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/nameTitleTV"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.12"
+        app:layout_constraintWidth_percent="0.16"
         tools:text="Price" />
 
     <androidx.recyclerview.widget.RecyclerView

@@ -33,6 +33,8 @@ class AddEditPriceFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.itemDate.isFocusable = false
+
         viewModelEdit.currentProduct.observe(this.viewLifecycleOwner) { product ->
             product.let {
                 binding.apply {

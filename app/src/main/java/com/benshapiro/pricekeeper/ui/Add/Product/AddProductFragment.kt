@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.benshapiro.pricekeeper.databinding.AddProductFragmentBinding
 import com.benshapiro.pricekeeper.utils.DatePickerFragment
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,6 +30,8 @@ class AddProductFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.apply { itemDate.isFocusable = false }
 
         viewModel.currentProduct?.observe(this.viewLifecycleOwner) { product ->
             if (viewModel.productId != -1) {
@@ -73,6 +76,4 @@ class AddProductFragment : Fragment() {
             }
         }
     }
-
-
 }
