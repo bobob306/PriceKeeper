@@ -2,15 +2,13 @@ package com.benshapiro.pricekeeper.ui.Add.Product
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.benshapiro.pricekeeper.databinding.AddProductFragmentBinding
 import com.benshapiro.pricekeeper.di.Repository
 import com.benshapiro.pricekeeper.model.Price
 import com.benshapiro.pricekeeper.model.Product
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import okhttp3.internal.format
-import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -46,6 +44,7 @@ class AddProductViewModel
         viewModelScope.launch {
             repository.updateProduct(updatedProduct)
         }
+        triggerSuccessUpdateEvent(name)
     }
 
     private fun addNewPrice(name: String, price: String, shop: String, quantity: String, date: String) {
@@ -54,6 +53,7 @@ class AddProductViewModel
             val newPrice = Price(name = name, price = price.toDouble(), date = date, quantity = quantity.toDouble(), itemId = newItemId)
             repository.insertPrice(newPrice)
         }
+        triggerSuccessEvent(name)
     }
 
 
@@ -78,6 +78,44 @@ class AddProductViewModel
         var formatter = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
         formatter.isLenient = false
 
-        return !(name.isBlank() || price.isBlank() || shop.isBlank() || quantity.isBlank() || date.isBlank())
+        return if (name.isBlank() || price.isBlank() || shop.isBlank() || quantity.isBlank() || date.isBlank()) {
+            triggerErrorEvent(name, price, shop, quantity, date)
+            false
+        } else {
+            true
+        }
+    }
+
+    sealed class Event {
+        data class ProductCreatedEvent(val message: String): Event()
+        data class ProductCreationError(val message: String): Event()
+    }
+
+    private val eventChannel = Channel<Event>()
+    val eventFlow = eventChannel.receiveAsFlow()
+
+    private fun triggerSuccessEvent(name: String)  = viewModelScope.launch {
+        eventChannel.send(Event.ProductCreatedEvent("Product $name was created"))
+    }
+    private fun triggerSuccessUpdateEvent(name: String) = viewModelScope.launch {
+        eventChannel.send(Event.ProductCreatedEvent("Product $name was updated"))
+    }
+
+    private fun triggerErrorEvent(
+        name: String, price: String, shop: String, quantity: String, date: String
+    ) = viewModelScope.launch {
+        val errorField = if (name.isBlank()) {
+            "Product name" } else {
+                if (price.isBlank()) {
+                    "Price" } else {
+                        if (shop.isBlank()) {
+                            "Shop name" } else {
+                                if (quantity.isBlank()) {"Quantity"} else {
+                                    "Date"
+                                }
+                        }
+                }
+        }
+        eventChannel.send(Event.ProductCreationError("Product was not created, problem with $errorField field"))
     }
 }

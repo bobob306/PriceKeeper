@@ -7,10 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.benshapiro.pricekeeper.databinding.AddProductFragmentBinding
 import com.benshapiro.pricekeeper.utils.DatePickerFragment
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class AddProductFragment : Fragment() {
@@ -20,11 +24,33 @@ class AddProductFragment : Fragment() {
 
     private val viewModel: AddProductViewModel by viewModels()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = AddProductFragmentBinding.inflate(inflater, container, false)
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.eventFlow.collect { event ->
+                when (event) {
+                    is AddProductViewModel.Event.ProductCreatedEvent -> {
+                        Snackbar.make(binding.root, event.message, Snackbar.LENGTH_LONG).show()
+                        findNavController().navigateUp()
+                    }
+                    is AddProductViewModel.Event.ProductCreationError -> {
+                        Snackbar.make(binding.root, event.message, Snackbar.LENGTH_LONG).show()
+                    }
+                }
+
+            }
+        }
+
         return binding.root
     }
 
