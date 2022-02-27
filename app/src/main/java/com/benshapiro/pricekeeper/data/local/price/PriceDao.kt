@@ -6,11 +6,11 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PriceDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(price: Price)
 
-    @Update
-    suspend fun update(price: Price)
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun update(updatedPrice: Price)
 
     @Query("SELECT * FROM table_prices WHERE itemId =:itemId ORDER BY date DESC")
     fun getPriceHistory(itemId: Int): Flow<List<Price>>

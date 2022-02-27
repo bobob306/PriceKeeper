@@ -2,9 +2,9 @@ package com.benshapiro.pricekeeper.data.local.product
 
 import androidx.room.*
 import com.benshapiro.pricekeeper.data.SortOrder
+import com.benshapiro.pricekeeper.model.Price
 import com.benshapiro.pricekeeper.model.Product
-import com.benshapiro.pricekeeper.model.relations.productWithPrices
-import dagger.Provides
+import com.benshapiro.pricekeeper.model.relations.ProductWithPrices
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -13,7 +13,7 @@ interface ProductDao {
     suspend fun insert(product: Product)
 
     @Update
-    suspend fun update(product: Product)
+    suspend fun update(updatedProduct: Product)
 
     @Delete
     suspend fun delete(product: Product)
@@ -39,5 +39,12 @@ interface ProductDao {
 
     @Query("SELECT * FROM product WHERE itemId = :itemId")
     fun getProductById(itemId: Int): Flow<Product>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertPrice(price: Price)
+
+    @Transaction
+    @Query("SELECT * FROM product WHERE itemId =:itemId")
+    suspend fun getProductWithPriceHistory(itemId: Int): List<ProductWithPrices>
 
 }

@@ -2,8 +2,6 @@ package com.benshapiro.pricekeeper.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.Query
-import kotlinx.coroutines.flow.Flow
 import java.io.Serializable
 import java.text.NumberFormat
 import java.util.*
@@ -13,6 +11,7 @@ data class Price(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val price: Double,
+    val quantity: Double = 1.0,
     val date: String,
     val name: String,
     val itemId: Int
@@ -20,3 +19,5 @@ data class Price(
 
 fun Price.getFormattedPrice(): String =
     NumberFormat.getCurrencyInstance(Locale.UK).format(price)
+fun Price.getValue(): String =
+    NumberFormat.getCurrencyInstance(Locale.UK).format(price/quantity) + " per unit"

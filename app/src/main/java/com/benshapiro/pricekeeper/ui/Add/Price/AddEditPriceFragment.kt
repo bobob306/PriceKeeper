@@ -33,7 +33,7 @@ class AddEditPriceFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModelEdit.product.observe(this.viewLifecycleOwner) { product ->
+        viewModelEdit.currentProduct.observe(this.viewLifecycleOwner) { product ->
             product.let {
                 binding.apply {
                     nameTV.text = product.name
@@ -44,12 +44,13 @@ class AddEditPriceFragment : Fragment() {
             }
         }
 
-        viewModelEdit.price?.observe(this.viewLifecycleOwner) { price ->
+        viewModelEdit.currentPrice?.observe(this.viewLifecycleOwner) { price ->
             price.let {
                 if (price != null) {
                     binding.apply {
                         itemPrice.setText(price.price.toString())
                         itemDate.setText(price.date)
+                        itemQauntity.setText(price.quantity.toString())
                     }
                 }
             }
@@ -73,7 +74,8 @@ class AddEditPriceFragment : Fragment() {
             saveAction.setOnClickListener {
                 viewModelEdit.addNewPrice(
                     itemPrice.text.toString(),
-                    itemDate.text.toString()
+                    itemQauntity.text.toString(),
+                    itemDate.text.toString(),
                 )
                 findNavController().navigateUp()
             }

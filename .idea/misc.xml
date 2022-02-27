@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/bobob/AndroidStudioProjects/PriceKeeper/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/bobob/AndroidStudioProjects/PriceKeeper/app/src/main/res/layout/add_product_fragment.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/bobob/AndroidStudioProjects/PriceKeeper/app/src/main/res/layout/fragment_add_edit_price.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/bobob/AndroidStudioProjects/PriceKeeper/app/src/main/res/layout/fragment_add_price.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/bobob/AndroidStudioProjects/PriceKeeper/app/src/main/res/layout/fragment_edit_price.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/bobob/AndroidStudioProjects/PriceKeeper/app/src/main/res/layout/fragment_edit_product.xml" value="0.25416666666666665" />

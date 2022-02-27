@@ -33,10 +33,31 @@
         tools:text="Price" />
 
     <TextView
+        android:id="@+id/qauntityTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/priceDetailTV"
+        app:layout_constraintTop_toBottomOf="@+id/nameDetailTV"
+        tools:text="Quantity" />
+
+    <TextView
+        android:id="@+id/valueTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/qauntityTV"
+        app:layout_constraintTop_toTopOf="@+id/qauntityTV"
+        tools:text="Value" />
+
+    <TextView
         android:id="@+id/shopDetailTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/nameDetailTV"
         app:layout_constraintTop_toTopOf="@+id/nameDetailTV"
@@ -46,10 +67,12 @@
         android:id="@+id/dateTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/priceDetailTV"
-        app:layout_constraintTop_toTopOf="@+id/priceDetailTV"
+        app:layout_constraintEnd_toStartOf="@+id/favDetailBtn"
+        app:layout_constraintStart_toEndOf="@+id/shopDetailTV"
+        app:layout_constraintTop_toTopOf="@+id/shopDetailTV"
         tools:text="Date of price update" />
 
     <ImageButton
@@ -145,4 +168,15 @@
         android:src="@drawable/ic_baseline_add_circle_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/editBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_baseline_edit_24"
+        app:layout_constraintBottom_toTopOf="@+id/fab2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/fab2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

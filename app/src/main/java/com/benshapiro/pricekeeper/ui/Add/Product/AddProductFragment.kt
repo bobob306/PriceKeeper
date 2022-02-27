@@ -30,17 +30,21 @@ class AddProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*
-        viewModel.newProduct.observe(this.viewLifecycleOwner){ product ->
-            product.let {
-                val currentId = viewModel.newProduct.value?.itemId ?: 0
-                if (currentId != viewModel.newProduct.value?.itemId ?: 0) {
-                    Log.d("old id", "$currentId")
-                    Log.d("id", "${viewModel.newProduct.value?.itemId ?: 1}")
+        viewModel.currentProduct?.observe(this.viewLifecycleOwner) { product ->
+            if (viewModel.productId != -1) {
+                binding.apply {
+                    itemName.setText(product.name)
+                    itemPrice.setText(product.currentPrice.toString())
+                    itemDate.setText(product.priceDate)
+                    itemQauntity.setText(product.quantity.toString())
+                    itemShop.setText(product.shop)
+                    itemPrice.isFocusable = false
+                    itemDate.isFocusable = false
+                    itemQauntity.isFocusable = false
                 }
             }
+
         }
-        */
 
         binding.apply {
             selectDateBtn.setOnClickListener {
@@ -63,6 +67,7 @@ class AddProductFragment : Fragment() {
                     itemName.text.toString(),
                     itemPrice.text.toString(),
                     itemShop.text.toString(),
+                    itemQauntity.text.toString(),
                     itemDate.text.toString()
                 )
             }

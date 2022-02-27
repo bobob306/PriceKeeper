@@ -5,7 +5,7 @@ import androidx.room.Relation
 import com.benshapiro.pricekeeper.model.Price
 import com.benshapiro.pricekeeper.model.Product
 
-data class productWithPrices(
+data class ProductWithPrices(
     @Embedded val product: Product,
     @Relation(
         parentColumn = "itemId",

@@ -1,6 +1,5 @@
 package com.benshapiro.pricekeeper.ui.Detail
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,6 +14,7 @@ import com.benshapiro.pricekeeper.R
 import com.benshapiro.pricekeeper.databinding.ProductDetailFragmentBinding
 import com.benshapiro.pricekeeper.model.Price
 import com.benshapiro.pricekeeper.model.getFormattedPrice
+import com.benshapiro.pricekeeper.model.getValue
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -58,6 +58,8 @@ class ProductDetailFragment : Fragment(), ProductDetailListAdapter.onPriceClickL
                     shopDetailTV.text = product.shop
                     priceDetailTV.text = product.getFormattedPrice()
                     dateTV.text = product.priceDate
+                    qauntityTV.text = "Quantity: "+product.quantity.toString()
+                    valueTV.text = product.getValue()
                     favDetailBtn.setImageResource(if (viewModel.product.value!!.favourite == 0) {
                         R.drawable.ic_baseline_star_outline_24 } else {
                             R.drawable.ic_baseline_star_rate_24 })
@@ -67,6 +69,12 @@ class ProductDetailFragment : Fragment(), ProductDetailListAdapter.onPriceClickL
 
         binding.favDetailBtn.setOnClickListener {
             viewModel.onFavClicked()
+        }
+
+        binding.editBtn.setOnClickListener {
+            val action = ProductDetailFragmentDirections.actionProductDetailFragmentToAddProductFragment()
+            action.product = viewModel.product.value
+            this.findNavController().navigate(action)
         }
 
         binding.fab2.setOnClickListener {

@@ -13,9 +13,12 @@ data class Product (
     val name: String,
     val shop: String,
     val currentPrice: Double,
+    val quantity: Double = 1.0,
     val priceDate: String,
     val favourite: Int
 ) : Serializable
 
 fun Product.getFormattedPrice(): String =
     NumberFormat.getCurrencyInstance(Locale.UK).format(currentPrice)
+fun Product.getValue(): String =
+    NumberFormat.getCurrencyInstance(Locale.UK).format(currentPrice/quantity) + " per unit"
