@@ -13,7 +13,7 @@ data class Product (
     val name: String,
     val shop: String,
     val currentPrice: Double,
-    val quantity: Double = 1.0,
+    val quantity: Double,
     val priceDate: String,
     val favourite: Int
 ) : Serializable

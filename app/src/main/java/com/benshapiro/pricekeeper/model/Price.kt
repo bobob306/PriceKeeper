@@ -11,7 +11,7 @@ data class Price(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val price: Double,
-    val quantity: Double = 1.0,
+    val quantity: Double,
     val date: String,
     val name: String,
     val itemId: Int
