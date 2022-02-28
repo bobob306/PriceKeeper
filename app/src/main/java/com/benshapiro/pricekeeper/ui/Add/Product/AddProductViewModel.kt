@@ -7,6 +7,7 @@ import com.benshapiro.pricekeeper.model.Price
 import com.benshapiro.pricekeeper.model.Product
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -40,10 +41,20 @@ class AddProductViewModel
     }
 
     private fun updateProduct(name: String, price: String, shop: String, quantity: String, date: String) {
-        val updatedProduct = Product(itemId = productId , name = name, currentPrice = price.toDouble(), shop = shop, quantity = quantity.toDouble(), priceDate = date, favourite = 0)
+        val updatedProduct = Product(itemId = productId , name = name, currentPrice = price.toDouble(), shop = shop, quantity = quantity.toDouble(), priceDate = date, favourite = currentProduct!!.value!!.favourite)
+        /**
+        * Aim is to update all price points with the same product ID to reflect the changed name
         viewModelScope.launch {
+            if (name != currentProduct!!.value!!.name) {
+                val listToChangeName: Flow<List<Price>> = repository.getPriceHistory(productId)
+                for(Price in listToChangeName.asLiveData().value!!.indices) {
+                    val updatedPriceName: Price = listToChangeName.asLiveData().value!![Price].copy(name = name)
+                    repository.updatePrice(updatedPriceName)
+                }
+            }
             repository.updateProduct(updatedProduct)
         }
+         **/
         triggerSuccessUpdateEvent(name)
     }
 

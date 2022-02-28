@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.benshapiro.pricekeeper.databinding.FragmentAddEditPriceBinding
 import com.benshapiro.pricekeeper.model.getFormattedPrice
 import com.benshapiro.pricekeeper.utils.DatePickerFragment
+import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,7 +34,10 @@ class AddEditPriceFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.itemDate.isFocusable = false
+        binding.apply {
+            itemDate.isFocusable = false
+            itemDate.setOnClickListener { datePicker(itemDate) }
+        }
 
         viewModelEdit.currentProduct.observe(this.viewLifecycleOwner) { product ->
             product.let {
@@ -59,6 +63,7 @@ class AddEditPriceFragment : Fragment() {
         }
         binding.apply {
             selectDateBtn.setOnClickListener {
+                datePicker(itemDate)
                 val datePickerFragment = DatePickerFragment()
                 val supportFragmentManager = requireActivity().supportFragmentManager
 
@@ -82,5 +87,21 @@ class AddEditPriceFragment : Fragment() {
                 findNavController().navigateUp()
             }
         }
+    }
+
+    private fun datePicker(itemDate: TextInputEditText) {
+        val datePickerFragment = DatePickerFragment()
+        val supportFragmentManager = requireActivity().supportFragmentManager
+
+        supportFragmentManager.setFragmentResultListener(
+            "REQUEST_KEY", viewLifecycleOwner
+        ) { resultKey, bundle ->
+            if (resultKey == "REQUEST_KEY") {
+                val date = bundle.getString("SELECTED_DATE")
+                Log.d("date", "$date")
+                itemDate.setText(date)
+            }
+        }
+        datePickerFragment.show(supportFragmentManager, "DatePickerFragment")
     }
 }

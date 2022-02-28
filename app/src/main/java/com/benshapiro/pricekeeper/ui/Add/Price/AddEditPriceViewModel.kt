@@ -48,7 +48,7 @@ class AddEditPriceViewModel @Inject constructor(private val repository: Reposito
         viewModelScope.launch {
             val updatedProduct = Product(
                 itemId = currentProduct.value!!.itemId,
-                favourite = currentProduct.value!!.itemId,
+                favourite = currentProduct.value!!.favourite,
                 priceDate = newDate,
                 currentPrice = newPrice.toDouble(),
                 quantity = newQuantity.toDouble(),
