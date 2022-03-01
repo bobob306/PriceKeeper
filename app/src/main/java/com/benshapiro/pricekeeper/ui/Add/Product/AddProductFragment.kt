@@ -57,10 +57,6 @@ class AddProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply {
-            itemDate.isFocusable = false
-            itemDate.setOnClickListener { datePicker(itemDate) }}
-
         viewModel.currentProduct?.observe(this.viewLifecycleOwner) { product ->
             if (viewModel.productId != -1) {
                 binding.apply {
@@ -72,24 +68,28 @@ class AddProductFragment : Fragment() {
                     itemPrice.isFocusable = false
                     itemDate.isFocusable = false
                     itemQauntity.isFocusable = false
+                    selectDateBtn.isFocusable = false
                 }
+            } else {
+                binding.apply {
+                    itemDate.isFocusable = false
+                    itemDate.setOnClickListener { datePicker(itemDate) }
+
+                }
+
             }
 
-        }
+            binding.apply {
 
-        binding.apply {
-            selectDateBtn.setOnClickListener {
-                datePicker(itemDate)
-
-            }
-            saveAction.setOnClickListener {
-                viewModel.addNewItem(
-                    itemName.text.toString(),
-                    itemPrice.text.toString(),
-                    itemShop.text.toString(),
-                    itemQauntity.text.toString(),
-                    itemDate.text.toString()
-                )
+                saveAction.setOnClickListener {
+                    viewModel.addNewItem(
+                        itemName.text.toString(),
+                        itemPrice.text.toString(),
+                        itemShop.text.toString(),
+                        itemQauntity.text.toString(),
+                        itemDate.text.toString()
+                    )
+                }
             }
         }
     }
@@ -110,3 +110,4 @@ class AddProductFragment : Fragment() {
         datePickerFragment.show(supportFragmentManager, "DatePickerFragment")
     }
 }
+

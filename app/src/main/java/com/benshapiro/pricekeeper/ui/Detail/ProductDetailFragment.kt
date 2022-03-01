@@ -1,11 +1,13 @@
 package com.benshapiro.pricekeeper.ui.Detail
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -16,6 +18,9 @@ import com.benshapiro.pricekeeper.model.Price
 import com.benshapiro.pricekeeper.model.getFormattedPrice
 import com.benshapiro.pricekeeper.model.getValue
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class ProductDetailFragment : Fragment(), ProductDetailListAdapter.onPriceClickListener {
@@ -33,6 +38,7 @@ class ProductDetailFragment : Fragment(), ProductDetailListAdapter.onPriceClickL
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -46,7 +52,7 @@ class ProductDetailFragment : Fragment(), ProductDetailListAdapter.onPriceClickL
 
         viewModel.priceList.observe(this.viewLifecycleOwner) { prices ->
             prices.let {
-                adapter.submitList(prices)
+                adapter.submitList(prices.sortedByDescending { LocalDate.parse(it.date, DateTimeFormatter.ofPattern("dd-MM-yyyy")) })
                 Log.d("first entry", "${prices[0].itemId} ${prices[0].price}" )
             }
         }
