@@ -64,7 +64,6 @@ class AddEditPriceViewModel @Inject constructor(private val repository: Reposito
             if (statePriceId != -1) {
                 val updatedPrice = Price(
                     id = currentPrice?.value!!.id,
-                    name = currentProduct.value!!.name,
                     price = newPricePoint.toDouble(),
                     quantity = newQuantity.toDouble(),
                     date = newDate,
@@ -74,7 +73,6 @@ class AddEditPriceViewModel @Inject constructor(private val repository: Reposito
                 repository.updatePrice(updatedPrice)
             } else {
                 val price = Price(
-                    name = currentProduct.value!!.name,
                     price = newPricePoint.toDouble(),
                     quantity = newQuantity.toDouble(),
                     date = newDate,

@@ -42,26 +42,13 @@ class AddProductViewModel
 
     private fun updateProduct(name: String, price: String, shop: String, quantity: String, date: String) {
         val updatedProduct = Product(itemId = productId , name = name, currentPrice = price.toDouble(), shop = shop, quantity = quantity.toDouble(), priceDate = date, favourite = currentProduct!!.value!!.favourite)
-        /**
-        * Aim is to update all price points with the same product ID to reflect the changed name
-        viewModelScope.launch {
-            if (name != currentProduct!!.value!!.name) {
-                val listToChangeName: Flow<List<Price>> = repository.getPriceHistory(productId)
-                for(Price in listToChangeName.asLiveData().value!!.indices) {
-                    val updatedPriceName: Price = listToChangeName.asLiveData().value!![Price].copy(name = name)
-                    repository.updatePrice(updatedPriceName)
-                }
-            }
-            repository.updateProduct(updatedProduct)
-        }
-         **/
         triggerSuccessUpdateEvent(name)
     }
 
     private fun addNewPrice(name: String, price: String, shop: String, quantity: String, date: String) {
         viewModelScope.launch {
             val newItemId : Int = repository.getMostRecentProduct().itemId
-            val newPrice = Price(name = name, price = price.toDouble(), date = date, quantity = quantity.toDouble(), itemId = newItemId)
+            val newPrice = Price(price = price.toDouble(), date = date, quantity = quantity.toDouble(), itemId = newItemId)
             repository.insertPrice(newPrice)
         }
         triggerSuccessEvent(name)

@@ -13,7 +13,6 @@ data class Price(
     val price: Double,
     val quantity: Double,
     val date: String,
-    val name: String,
     val itemId: Int
 ) : Serializable
 

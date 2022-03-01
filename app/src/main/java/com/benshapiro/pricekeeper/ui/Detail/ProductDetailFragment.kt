@@ -47,7 +47,7 @@ class ProductDetailFragment : Fragment(), ProductDetailListAdapter.onPriceClickL
         viewModel.priceList.observe(this.viewLifecycleOwner) { prices ->
             prices.let {
                 adapter.submitList(prices)
-                Log.d("first entry", "${prices[0].name} ${prices[0].price}" )
+                Log.d("first entry", "${prices[0].itemId} ${prices[0].price}" )
             }
         }
 
