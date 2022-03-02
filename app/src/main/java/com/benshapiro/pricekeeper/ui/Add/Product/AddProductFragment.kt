@@ -57,8 +57,17 @@ class AddProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.apply {
+            itemDate.isFocusable = false
+            if (viewModel.productId == -1)
+            itemDate.setOnClickListener { datePicker(itemDate) }
+        }
+
         viewModel.currentProduct?.observe(this.viewLifecycleOwner) { product ->
-            if (viewModel.productId != -1) {
+            Log.d("productId", "${viewModel.productId}")
+            if (viewModel.productId != -1)
+            {
+                Log.d("productId", "${viewModel.productId}")
                 binding.apply {
                     itemName.setText(product.name)
                     itemPrice.setText(product.currentPrice.toString())
@@ -70,26 +79,19 @@ class AddProductFragment : Fragment() {
                     itemQauntity.isFocusable = false
                     selectDateBtn.isFocusable = false
                 }
-            } else {
-                binding.apply {
-                    itemDate.isFocusable = false
-                    itemDate.setOnClickListener { datePicker(itemDate) }
-
-                }
-
             }
+        }
 
-            binding.apply {
+        binding.apply {
 
-                saveAction.setOnClickListener {
-                    viewModel.addNewItem(
-                        itemName.text.toString(),
-                        itemPrice.text.toString(),
-                        itemShop.text.toString(),
-                        itemQauntity.text.toString(),
-                        itemDate.text.toString()
-                    )
-                }
+            saveAction.setOnClickListener {
+                viewModel.addNewItem(
+                    itemName.text.toString(),
+                    itemPrice.text.toString(),
+                    itemShop.text.toString(),
+                    itemQauntity.text.toString(),
+                    itemDate.text.toString()
+                )
             }
         }
     }

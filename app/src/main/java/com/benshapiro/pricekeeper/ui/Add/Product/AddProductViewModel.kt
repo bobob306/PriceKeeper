@@ -20,8 +20,6 @@ class AddProductViewModel
     private val repository: Repository, private val state: SavedStateHandle
 ) : ViewModel() {
 
-    var dateStatus = MutableLiveData<Boolean?>()
-
     val productId = state.get<Product>("Product")?.itemId ?: -1
     val currentProduct = if (productId != -1) {
         repository.getProductById(productId).asLiveData()} else { null }
@@ -42,6 +40,9 @@ class AddProductViewModel
 
     private fun updateProduct(name: String, price: String, shop: String, quantity: String, date: String) {
         val updatedProduct = Product(itemId = productId , name = name, currentPrice = price.toDouble(), shop = shop, quantity = quantity.toDouble(), priceDate = date, favourite = currentProduct!!.value!!.favourite)
+        viewModelScope.launch {
+            repository.updateProduct(updatedProduct)
+        }
         triggerSuccessUpdateEvent(name)
     }
 
