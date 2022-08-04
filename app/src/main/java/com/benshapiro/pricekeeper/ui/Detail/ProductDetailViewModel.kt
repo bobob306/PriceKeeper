@@ -23,17 +23,22 @@ class ProductDetailViewModel @Inject constructor(private val repository: Reposit
     }
     fun onFavClicked() {
         val fav = if (product.value!!.favourite == 0) 1 else 0
-        val currentProduct = Product (
-            itemId = product.value!!.itemId,
-            name = product.value!!.name,
-            currentPrice = product.value!!.currentPrice,
-            priceDate = product.value!!.priceDate,
-            shop = product.value!!.shop,
-            quantity = product.value!!.quantity,
-            favourite = fav
-                )
+        val currentProduct = product.value?.let { product ->
+            product
+            Product(
+                    itemId = product.itemId,
+                    name = product.name,
+                    currentPrice = product.currentPrice,
+                    priceDate = product.priceDate,
+                    shop = product.shop,
+                    quantity = product.quantity,
+                    favourite = fav
+            )
+        }
         viewModelScope.launch {
-            repository.updateProduct(currentProduct)
+            if (currentProduct != null) {
+                repository.updateProduct(currentProduct)
+            }
         }
     }
 }
