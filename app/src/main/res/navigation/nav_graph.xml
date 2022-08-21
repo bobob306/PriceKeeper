@@ -46,6 +46,9 @@
             android:defaultValue="@null"
             app:argType="com.benshapiro.pricekeeper.model.Product"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_addProductFragment_to_productListFragment"
+            app:destination="@id/productListFragment" />
     </fragment>
     <fragment
         android:id="@+id/addPriceFragment"

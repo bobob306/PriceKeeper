@@ -20,6 +20,9 @@ interface PriceDao {
     @Query("DELETE FROM table_prices")
     suspend fun deleteAll()
 
+    @Query("DELETE FROM table_prices WHERE itemId=:itemId")
+    suspend fun deleteProductPrices(itemId: Int)
+
     @Query("SELECT * FROM table_prices WHERE id =:id")
     fun getPriceById(id: Int): Flow<Price>
 }

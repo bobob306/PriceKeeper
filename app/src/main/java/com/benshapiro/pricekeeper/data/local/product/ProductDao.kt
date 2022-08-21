@@ -16,7 +16,7 @@ interface ProductDao {
     suspend fun update(updatedProduct: Product)
 
     @Delete
-    suspend fun delete(product: Product)
+    suspend fun delete(deletedProduct: Product)
 
     @Query("SELECT * FROM product ORDER BY name asc")
     fun getProductList(query: String, sortOrder: SortOrder): Flow<List<Product>> =

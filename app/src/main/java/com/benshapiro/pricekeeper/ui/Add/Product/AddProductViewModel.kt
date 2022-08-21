@@ -17,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class AddProductViewModel
 @Inject constructor(
-    private val repository: Repository, private val state: SavedStateHandle
+    private val repository: Repository,
+    private val state: SavedStateHandle
 ) : ViewModel() {
 
     val productId = state.get<Product>("Product")?.itemId ?: -1
@@ -36,6 +37,14 @@ class AddProductViewModel
                 addNewProduct(name, price, shop, quantity, date)
             }
         }
+    }
+
+    fun deleteItem() {
+        viewModelScope.launch {
+            repository.deleteProductPrices(itemId = productId)
+            repository.deleteProduct(deletedProduct = currentProduct!!.value!!)
+        }
+        triggerSuccessProductDeletedEvent()
     }
 
     private fun updateProduct(name: String, price: String, shop: String, quantity: String, date: String) {
@@ -88,6 +97,7 @@ class AddProductViewModel
     sealed class Event {
         data class ProductCreatedEvent(val message: String): Event()
         data class ProductCreationError(val message: String): Event()
+        data class ProductDeletedEvent(val message: String): Event()
     }
 
     private val eventChannel = Channel<Event>()
@@ -98,6 +108,9 @@ class AddProductViewModel
     }
     private fun triggerSuccessUpdateEvent(name: String) = viewModelScope.launch {
         eventChannel.send(Event.ProductCreatedEvent("Product $name was updated"))
+    }
+    private fun triggerSuccessProductDeletedEvent() = viewModelScope.launch {
+        eventChannel.send(Event.ProductDeletedEvent("Product and prices deleted"))
     }
 
     private fun triggerErrorEvent(
