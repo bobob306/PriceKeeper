@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -46,8 +47,10 @@ class AddProductFragment : Fragment() {
                     is AddProductViewModel.Event.ProductCreationError -> {
                         Snackbar.make(binding.root, event.message, Snackbar.LENGTH_LONG).show()
                     }
+                    is AddProductViewModel.Event.ProductDeletedEvent -> {
+                        Snackbar.make(binding.root, event.message, Snackbar.LENGTH_LONG).show()
+                    }
                 }
-
             }
         }
 
@@ -61,6 +64,7 @@ class AddProductFragment : Fragment() {
             itemDate.isFocusable = false
             if (viewModel.productId == -1)
             itemDate.setOnClickListener { datePicker(itemDate) }
+            selectDateBtn.setOnClickListener{datePicker(itemDate)}
         }
 
         viewModel.currentProduct?.observe(this.viewLifecycleOwner) { product ->
@@ -78,6 +82,14 @@ class AddProductFragment : Fragment() {
                     itemDate.isFocusable = false
                     itemQauntity.isFocusable = false
                     selectDateBtn.isFocusable = false
+                    deleteBtn.isGone = false
+
+                    deleteBtn.setOnClickListener {
+                        viewModel.deleteItem()
+                        findNavController().navigate(
+                            AddProductFragmentDirections
+                                .actionAddProductFragmentToProductListFragment())
+                    }
                 }
             }
         }
@@ -93,6 +105,7 @@ class AddProductFragment : Fragment() {
                     itemDate.text.toString()
                 )
             }
+            deleteBtn.isGone = true
         }
     }
 

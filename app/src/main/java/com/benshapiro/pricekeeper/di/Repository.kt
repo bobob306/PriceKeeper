@@ -43,4 +43,12 @@ class Repository
     fun getPriceById(id: Int) : Flow<Price> {
         return priceDao.getPriceById(id)
     }
+
+    suspend fun deleteProduct(deletedProduct: Product) {
+        productDao.delete(deletedProduct)
+    }
+
+    suspend fun deleteProductPrices(itemId: Int) {
+        priceDao.deleteProductPrices(itemId)
+    }
 }

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "195774518144",
+    "firebase_url": "https://shopping-prices-da10d-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "shopping-prices-da10d",
+    "storage_bucket": "shopping-prices-da10d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:195774518144:android:535919ac57b8f5ed43e765",
+        "android_client_info": {
+          "package_name": "com.benshapiro.pricekeeper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "195774518144-8qb0n8bc5dshf1ta1rih9v18iffpoq2j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDopxx6uABAzN_NFsG5-tYM3d_KTJ5R4Ro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "195774518144-8qb0n8bc5dshf1ta1rih9v18iffpoq2j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
